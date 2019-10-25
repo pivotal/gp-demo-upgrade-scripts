@@ -5,6 +5,8 @@ main() {
 
     gpstop -a
 
+    rsync -a --delete gpdb5-data/ gpdb5-data-backup
+
     ./scripts/backup-the-backup.sh
 
     gpstart -a
