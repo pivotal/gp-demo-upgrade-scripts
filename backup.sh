@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 
-main() {
-    source scripts/gpdb5-environment.sh
+# Get the Current Working DIRectory (CWDIR) of this file
+CWDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+TODAYS_DATE=$(date +'%Y-%m-%d-%H-%M-%S')
+
+
+for GP_RELEASE in 5 6; do
+    mkdir -p ${CWDIR}/../gpdb-backups
+
+    source ${CWDIR}/../gpdb${GP_RELEASE}-src/.envrc
 
     gpstop -a
 
-    rsync -a --delete gpdb5-data/ gpdb5-data-backup
+    rsync -a \
+          --delete \
+          ${CWDIR}/../gpdb${GP_RELEASE}-datadirs/ \
+          ${CWDIR}/../gpdb-backups/gpdb${GP_RELEASE}-data-backup
 
-    ./scripts/backup-the-backup.sh
+    tar czf ${CWDIR}/../gpdb-backups/gpdb${GP_RELEASE}-cluster-backup.$TODAYS_DATE.tar.gz -C ${CWDIR}/../gpdb-backups/gpdb${GP_RELEASE}-data-backup/ .
 
     gpstart -a
-}
-
-main
+done

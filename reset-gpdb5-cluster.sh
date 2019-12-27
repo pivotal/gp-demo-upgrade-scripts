@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
-source ./scripts/gpdb5-environment.sh
+# Get the Current Working DIRectory (CWDIR) of this file
+CWDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+GP_RELEASE=5
+
+source ${CWDIR}/../gpdb${GP_RELEASE}-src/.envrc
+
 gpstop -a
-rsync -a --delete gpdb5-data-backup/ gpdb5-data
+
+rsync -au \
+      ${CWDIR}/../gpdb-backups/gpdb${GP_RELEASE}-data-backup/ \
+      ${CWDIR}/../gpdb${GP_RELEASE}-datadirs
+
+gpstart -a
