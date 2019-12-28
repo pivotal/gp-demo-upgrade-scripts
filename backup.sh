@@ -5,7 +5,6 @@ CWDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 TODAYS_DATE=$(date +'%Y-%m-%d-%H-%M-%S')
 
-
 for GP_RELEASE in 5 6; do
     mkdir -p ${CWDIR}/../gpdb-backups
 
