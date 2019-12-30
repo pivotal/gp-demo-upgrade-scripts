@@ -1,13 +1,13 @@
 #!/bin/bash
 
-set -e
-
 # Get the Current Working DIRectory (CWDIR) of this file
 CWDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source ${CWDIR}/../gpdb5-src/.envrc
 
-## gpstop -a
+set +e
+gpstop -a
+set -e
 
 ## rsync -a --delete gpdb5-data/ gpdb5-data-backup
 
@@ -47,14 +47,14 @@ rsync_excludes="--exclude=internal.auto.conf
                 --exclude=postmaster.opts
                 --exclude=postgresql.auto.conf"
 
-rsync -av --delete $rsync_excludes \
+rsync -a --delete $rsync_excludes \
       /data/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
       /data/workspace/gpdb6-datadirs/dbfast1/demoDataDir0
 
-rsync -av --delete $rsync_excludes \
+rsync -a --delete $rsync_excludes \
       /data/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
       /data/workspace/gpdb6-datadirs/dbfast2/demoDataDir1
-rsync -av --delete $rsync_excludes \
+rsync -a --delete $rsync_excludes \
       /data/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
       /data/workspace/gpdb6-datadirs/dbfast3/demoDataDir2
 
@@ -101,10 +101,10 @@ cat <<-EOF
 EOF
 
 pg_upgrade  --link \
-           --old-gp-dbid=4 \
-           --new-gp-dbid=4 \
-	       --old-bindir=/data/workspace/gpdb5-install/bin \
-	       --new-bindir=/data/workspace/gpdb6-install/bin \
-	       --old-datadir=/data/workspace/gpdb5-datadirs/dbfast3/demoDataDir2 \
-	       --new-datadir=/data/workspace/gpdb6-datadirs/dbfast3/demoDataDir2 \
-	       --mode=segment
+            --old-gp-dbid=4 \
+            --new-gp-dbid=4 \
+	        --old-bindir=/data/workspace/gpdb5-install/bin \
+	        --new-bindir=/data/workspace/gpdb6-install/bin \
+	        --old-datadir=/data/workspace/gpdb5-datadirs/dbfast3/demoDataDir2 \
+	        --new-datadir=/data/workspace/gpdb6-datadirs/dbfast3/demoDataDir2 \
+	        --mode=segment

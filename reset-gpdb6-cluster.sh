@@ -9,8 +9,13 @@ source ${CWDIR}/../gpdb${GP_RELEASE}-src/.envrc
 
 gpstop -a
 
-rsync -au \
+rsync -a \
+      --delete \
       ${CWDIR}/../gpdb-backups/gpdb${GP_RELEASE}-data-backup/ \
       ${CWDIR}/../gpdb${GP_RELEASE}-datadirs
+
+diff -r \
+     ${CWDIR}/../gpdb-backups/gpdb${GP_RELEASE}-data-backup \
+     ${CWDIR}/../gpdb${GP_RELEASE}-datadirs
 
 gpstart -a
