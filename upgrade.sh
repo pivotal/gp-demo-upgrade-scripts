@@ -29,10 +29,10 @@ EOF
 pg_upgrade --link \
            --old-gp-dbid=1 \
            --new-gp-dbid=1 \
-	       --old-bindir=${HOME}/workspace/gpdb5-install/bin \
-	       --new-bindir=${HOME}/workspace/gpdb6-install/bin \
-	       --old-datadir=${HOME}/workspace/gpdb5-datadirs/qddir/demoDataDir-1 \
-	       --new-datadir=${HOME}/workspace/gpdb6-datadirs/qddir/demoDataDir-1 \
+	       --old-bindir=/data/workspace/gpdb5-install/bin \
+	       --new-bindir=/data/workspace/gpdb6-install/bin \
+	       --old-datadir=/data/workspace/gpdb5-datadirs/qddir/demoDataDir-1 \
+	       --new-datadir=/data/workspace/gpdb6-datadirs/qddir/demoDataDir-1 \
 	       --mode=dispatcher
 
 cat <<-EOF
@@ -48,15 +48,15 @@ rsync_excludes="--exclude=internal.auto.conf
                 --exclude=postgresql.auto.conf"
 
 rsync -av --delete $rsync_excludes \
-      ${HOME}/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
-      ${HOME}/workspace/gpdb6-datadirs/dbfast1/demoDataDir0
+      /data/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
+      /data/workspace/gpdb6-datadirs/dbfast1/demoDataDir0
 
 rsync -av --delete $rsync_excludes \
-      ${HOME}/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
-      ${HOME}/workspace/gpdb6-datadirs/dbfast2/demoDataDir1
+      /data/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
+      /data/workspace/gpdb6-datadirs/dbfast2/demoDataDir1
 rsync -av --delete $rsync_excludes \
-      ${HOME}/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
-      ${HOME}/workspace/gpdb6-datadirs/dbfast3/demoDataDir2
+      /data/workspace/gpdb6-datadirs/qddir/demoDataDir-1/ \
+      /data/workspace/gpdb6-datadirs/dbfast3/demoDataDir2
 
 cat <<-EOF
 
@@ -69,10 +69,10 @@ EOF
 pg_upgrade --link \
            --old-gp-dbid=2 \
            --new-gp-dbid=2 \
-	       --old-bindir=${HOME}/workspace/gpdb5-install/bin \
-	       --new-bindir=${HOME}/workspace/gpdb6-install/bin \
-	       --old-datadir=${HOME}/workspace/gpdb5-datadirs/dbfast1/demoDataDir0 \
-	       --new-datadir=${HOME}/workspace/gpdb6-datadirs/dbfast1/demoDataDir0 \
+	       --old-bindir=/data/workspace/gpdb5-install/bin \
+	       --new-bindir=/data/workspace/gpdb6-install/bin \
+	       --old-datadir=/data/workspace/gpdb5-datadirs/dbfast1/demoDataDir0 \
+	       --new-datadir=/data/workspace/gpdb6-datadirs/dbfast1/demoDataDir0 \
 	       --mode=segment
 
 cat <<-EOF
@@ -86,10 +86,10 @@ EOF
 pg_upgrade --link \
            --old-gp-dbid=3 \
            --new-gp-dbid=3 \
-	       --old-bindir=${HOME}/workspace/gpdb5-install/bin \
-	       --new-bindir=${HOME}/workspace/gpdb6-install/bin \
-	       --old-datadir=${HOME}/workspace/gpdb5-datadirs/dbfast2/demoDataDir1 \
-	       --new-datadir=${HOME}/workspace/gpdb6-datadirs/dbfast2/demoDataDir1 \
+	       --old-bindir=/data/workspace/gpdb5-install/bin \
+	       --new-bindir=/data/workspace/gpdb6-install/bin \
+	       --old-datadir=/data/workspace/gpdb5-datadirs/dbfast2/demoDataDir1 \
+	       --new-datadir=/data/workspace/gpdb6-datadirs/dbfast2/demoDataDir1 \
 	       --mode=segment
 
 cat <<-EOF
@@ -103,8 +103,8 @@ EOF
 pg_upgrade  --link \
            --old-gp-dbid=4 \
            --new-gp-dbid=4 \
-	       --old-bindir=${HOME}/workspace/gpdb5-install/bin \
-	       --new-bindir=${HOME}/workspace/gpdb6-install/bin \
-	       --old-datadir=${HOME}/workspace/gpdb5-datadirs/dbfast3/demoDataDir2 \
-	       --new-datadir=${HOME}/workspace/gpdb6-datadirs/dbfast3/demoDataDir2 \
+	       --old-bindir=/data/workspace/gpdb5-install/bin \
+	       --new-bindir=/data/workspace/gpdb6-install/bin \
+	       --old-datadir=/data/workspace/gpdb5-datadirs/dbfast3/demoDataDir2 \
+	       --new-datadir=/data/workspace/gpdb6-datadirs/dbfast3/demoDataDir2 \
 	       --mode=segment
