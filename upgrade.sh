@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pg_upgrade_mode=${pg_upgrade_mode:=--link}
+
 # Get the Current Working DIRectory (CWDIR) of this file
 CWDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -26,7 +28,7 @@ cat <<-EOF
 	######################################################################
 EOF
 
-pg_upgrade --link \
+pg_upgrade ${pg_upgrade_mode} \
            --old-gp-dbid=1 \
            --new-gp-dbid=1 \
 	       --old-bindir=/data/workspace/gpdb5-install/bin \
@@ -66,7 +68,7 @@ cat <<-EOF
 
 EOF
 
-pg_upgrade --link \
+pg_upgrade ${pg_upgrade_mode} \
            --old-gp-dbid=2 \
            --new-gp-dbid=2 \
 	       --old-bindir=/data/workspace/gpdb5-install/bin \
@@ -83,7 +85,7 @@ cat <<-EOF
 
 EOF
 
-pg_upgrade --link \
+pg_upgrade ${pg_upgrade_mode} \
            --old-gp-dbid=3 \
            --new-gp-dbid=3 \
 	       --old-bindir=/data/workspace/gpdb5-install/bin \
@@ -100,7 +102,7 @@ cat <<-EOF
 
 EOF
 
-pg_upgrade  --link \
+pg_upgrade  ${pg_upgrade_mode} \
             --old-gp-dbid=4 \
             --new-gp-dbid=4 \
 	        --old-bindir=/data/workspace/gpdb5-install/bin \
